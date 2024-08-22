@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import "../main.css";
+import Repo from "../components/Repo.astro";
+---
+
+
+
+<Layout title="About me - Intercepted16">
+	<main>
+		<h1 class="my-12">Welcome to <span class="text-gradient">my personal website</span></h1>
+		<p class="instructions">👋 Hi, I'm intercepted16!</p>
+		<p class="mx-auto flex items-center justify-center">I'm a high-school student based in Melbourne, Australia.
+			<br/>
+			I like programming..a lot. It's my main hobby!
+			<br/>
+			There's not much to say about me. I'm just a regular high-school student who likes to code.
+			<br/>
+			But you can see my GitHub projects and profile below!
+		</p>
+		<h2 class="my-12 text-2xl justify-center self-center mx-auto items-center justify-items-center flex">My GitHub projects</h2>
+		<ul class="flex justify-center mt-2 sm:flex-row flex-col sm:space-x-4 sm:space-y-0 space-y-4">
+			<Repo repoName="intercepted16/i16.me" repoDescription="My personal website!" repoUrl="https://github.com/intercepted16/i16.me" />
+		</ul>
+	</main>
+</Layout>
+
+<style>
+	@tailwind base;
+	@tailwind components;
+	@tailwind utilities;
+
+	main {
+		@apply mx-auto p-4 w-[800px] max-w-[calc(100%-2rem)] text-white text-lg leading-relaxed;
+	}
+
+	.astro-a {
+		@apply absolute top-[-32px] left-1/2 -translate-x-1/2 w-[220px] h-auto -z-10;
+	}
+
+	h1 {
+		@apply text-6xl font-bold leading-tight text-center mb-4;
+	}
+
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+
+	.instructions {
+		@apply mb-8 border border-opacity-25 border-[rgba(var(--accent-light),0.25)] bg-gradient-to-b from-[rgba(var(--accent-dark),0.66)] to-[rgba(var(--accent-dark),0.33)] p-6 rounded-lg;
+	}
+
+	.instructions code {
+		@apply text-xs font-bold bg-[rgba(var(--accent-light),0.12)] text-[rgb(var(--accent-light))] rounded px-1.5 py-1;
+	}
+
+	.instructions strong {
+		@apply text-[rgb(var(--accent-light))];
+	}
+
+	.link-card-grid {
+		@apply grid grid-cols-[repeat(auto-fit,_minmax(24ch,_1fr))] gap-8 p-0;
+	}
+
+</style>
+

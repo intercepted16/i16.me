@@ -1,0 +1,11 @@
+---
+import Card from "./Card.astro";
+
+interface Props {
+    repoName: string;
+    repoDescription: string;
+    repoUrl: string;
+}
+const { repoName, repoDescription, repoUrl } = Astro.props;
+---
+<Card body={repoDescription} href={repoUrl} title={repoName} />
