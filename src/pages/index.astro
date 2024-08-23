@@ -2,14 +2,48 @@
 import Layout from '../layouts/Layout.astro';
 import "../main.css";
 import Repo from "../components/Repo.astro";
+type Repo = {
+	repoName: string;
+	repoDescription: string;
+	hostedOn: "github" | "gitlab" | "bitbucket";
+};
+
+const repos: Repo[] = [
+	{
+		repoName: "i16.me",
+		repoDescription: "My personal website!",
+	},
+	{
+		repoName: "mtafoubs",
+		repoDescription: "A simple Golang CLI tool to move trash across filesystems on Unix-like systems",
+	},
+	{
+		repoName: "structure-walker",
+		repoDescription: "A Go-lang and C program to walk through data structures",
+	},
+	{
+		repoName: "interceptive-c",
+		repoDescription: "A programming language written in Rust. I am making it for the fun of it!",
+	}
+].map((repo) => ({
+	...repo,
+	repoName: `intercepted16/${repo.repoName}`,
+	hostedOn: "github"
+}));
+
+const gridCols = repos.length % 2 == 0 ? "grid-cols-2" : "grid-cols-3";
 ---
 
 
 
 <Layout title="About me - Intercepted16">
+	<script src="https://cdn.jsdelivr.net/gh/Rapsssito/github-profile-badge@latest/src/widget.min.js"></script>
 	<main>
 		<h1 class="my-12">Welcome to <span class="text-gradient">my personal website</span></h1>
-		<p class="instructions">👋 Hi, I'm intercepted16!</p>
+		<p class="instructions flex justify-center items-center">
+			<span>👋 Hi, I'm intercepted16!</span>
+		<span class="github-profile-badge mx-4" data-user="intercepted16"</span>
+		</p>
 		<p class="mx-auto flex items-center justify-center">I'm a high-school student based in Melbourne, Australia.
 			<br/>
 			I like programming..a lot. It's my main hobby!
@@ -19,9 +53,13 @@ import Repo from "../components/Repo.astro";
 			But you can see my GitHub projects and profile below!
 		</p>
 		<h2 class="my-12 text-2xl justify-center self-center mx-auto items-center justify-items-center flex">My GitHub projects</h2>
-		<ul class="flex justify-center mt-2 sm:flex-row flex-col sm:space-x-4 sm:space-y-0 space-y-4">
-			<Repo repoName="intercepted16/i16.me" repoDescription="My personal website!" hostedOn="github" />
-		</ul>
+		<div class="flex justify-center mt-2 sm:flex-row flex-col">
+			<ul class={`grid grid-cols-1 ${repos.length % 2 == 0 ? "sm:grid-cols-2" : "sm:grid-cols-3"} gap-4 w-full`}>
+				{repos.map((repo) => (
+					<Repo repoName={repo.repoName} repoDescription={repo.repoDescription} hostedOn={repo.hostedOn} />
+				))}
+			</ul>
+		</div>
 	</main>
 </Layout>
 
