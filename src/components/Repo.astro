@@ -1,11 +1,29 @@
 ---
 import Card from "./Card.astro";
 
+type GitHost = "github" | "gitlab" | "bitbucket";
+
+const GitUrl: { [key in GitHost]: string } = {
+    github: "github.com",
+    gitlab: "gitlab.com",
+    bitbucket: "bitbucket.org"
+};
+
 interface Props {
     repoName: string;
     repoDescription: string;
-    repoUrl: string;
+    hostedOn: GitHost | null;
+    gitUrl?: string;
+    openInNewTab?: boolean;
 }
-const { repoName, repoDescription, repoUrl } = Astro.props;
+
+
+const { repoName, repoDescription, hostedOn , gitUrl, openInNewTab = true} = Astro.props;
+// check that at least one of gitUrl or hostedOn is provided
+if (!gitUrl && !hostedOn) {
+    throw new Error("You must provide either a gitUrl or hostedOn prop");
+}
+const repoUrl = hostedOn ? `https://${GitUrl[hostedOn]}/${repoName}` : gitUrl;
 ---
-<Card body={repoDescription} href={repoUrl} title={repoName} />
+<!-- use || "" just so that the IDE doesn't warn you-->
+<Card body={repoDescription} href={repoUrl || ""} title={repoName} openInNewTab />

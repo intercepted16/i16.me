@@ -13,6 +13,9 @@
     "@astrojs/check": "^0.9.3",
     "@astrojs/tailwind": "^5.1.0",
     "astro": "^4.14.4",
+    "ioredis": "^5.4.1",
+    "octokit": "^4.0.2",
+    "redis": "^4.7.0",
     "typescript": "^5.5.4"
   },
   "devDependencies": {
